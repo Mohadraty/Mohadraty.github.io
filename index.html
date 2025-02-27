@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="/">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Mohadraty is a smart attendance tracking app for students and tutors, using QR code technology for seamless and accurate check-ins. Simplify attendance management and stay organized with real-time tracking.">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="mohadraty">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>محاضراتي - Mohadraty</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    /* Full screen loader styles */
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #141416; /* Light background */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #loading {
+      text-align: center;
+      font-family: 'Cairo', sans-serif;
+      font-size: 18px;
+      color: #BEFF6C;
+    }
+
+    #loading img {
+      width: 55px;
+      height: 75px;
+      margin-bottom: 20px;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Splash screen (spinner + text) -->
+<div id="loading">
+  <img src="icons/loading.gif" alt="Loading">
+  <div>Loading Mohadraty ...</div>
+</div>
+
+<!-- Flutter will load here -->
+<script src="flutter_bootstrap.js" async></script>
+
+<script>
+  // Hide splash screen once Flutter is ready
+  window.addEventListener('flutter-first-frame', function() {
+    document.getElementById('loading').style.display = 'none';
+  });
+
+  // Register service worker for Firebase messaging
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/firebase-messaging-sw.js')
+      .then((registration) => {
+        console.log("Service Worker registered:", registration);
+      })
+      .catch((err) => {
+        console.log("Service Worker registration failed:", err);
+      });
+  }
+</script>
+
+</body>
+</html>
